@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="http://cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+	<script src="http://cdn.bootcss.com/bootstrap/2.3.0/bootstrap.min.js"></script>
+	
+	<link href="http://cdn.bootcss.com/bootstrap/4.0.0-alpha.4/css/bootstrap.min.css" rel="stylesheet">
+	<link href="http://cdn.bootcss.com/summernote/0.8.3/summernote.css" rel="stylesheet">
+	<script src="http://cdn.bootcss.com/summernote/0.8.3/summernote.min.js"></script>
+	<script src="http://cdn.bootcss.com/summernote/0.8.3/lang/summernote-zh-CN.min.js"></script>
+
+	
+</head>
+<body>
+	<div class="container">
+		<form onsubmit="return false;">
+
+
+		<div class="form-group">
+		<label class="form-label">夏日友人帐：</label>
+		<div id="summernote"></div>
+		</div>
+
+		<input type="submit" class="btn btn-primary" id="sub" value="提交" />
+	</form>
+	<script>
+	//富文本编辑器汉化
+
+		$('#summernote').summernote({
+			callbacks: {
+				onImageUpload: function(files) {
+					console.log(files);
+					var formData = new FormData();
+					for(var i=0;i<files.length;i++){
+						formData.append('file',files[i]);
+					}
+						// $.ajax({
+						// 	url: '/goods/uploadFile',
+						// 	type: 'POST',
+						// 	processData: false,
+						// 	contentType: false,
+						// 	success: function(data) {
+						// 		$('#summernote').summernote('insertImage', data.path, 'img');
+						// 	}
+						// })
+				}
+			}
+		});
+
+		$("#sub").click(function() {
+			var markupStr = $('#summernote').summernote('code');
+			console.log(markupStr)
+		})
+	</script>
+</body>
+</html>

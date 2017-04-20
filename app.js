@@ -7,6 +7,10 @@ var bodyParser = require('body-parser');
 var about = require('./routes/about');
 var index = require('./routes/index');
 var users = require('./routes/users');
+var cate = require('./routes/cate');
+var goods = require('./routes/goods');
+
+
 
 var app = express();
 
@@ -25,6 +29,10 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', index);
 app.use('/users', users);
 app.use('/about', about);
+app.use('/cate', cate);
+app.use('/goods', goods);
+
+
 
 // 路由和句柄函数(中间件系统)，处理指向 /user/:id 的 GET 请求
 app.get('/user/:id', function (req, res, next) {
