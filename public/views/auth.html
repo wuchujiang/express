@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="http://cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+	<link href="http://cdn.bootcss.com/bootstrap/4.0.0-alpha.4/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+	<div style="padding:100px;position: absolute;left: 50%;top: 50%;transform: translate(-50%, -50%);">
+		<h4 style="text-align: center;padding-bottom: 20px;">登录</h4>
+		<div class="form-control">
+			<div>
+			<label for="">用户名</label>
+			<input type="text" id="username">
+		</div>
+		<div>
+			<label for="">密码</label>
+			<input type="password" id="password">
+		</div>
+		</div>
+		
+		<button style="margin-top: 20px;" class="btn btn-primary" onclick="login()">登录</button>
+	</div>
+</body>
+<script>
+	function login() {
+		var username = $('#username').val();
+		var password = $('#password').val();
+		$.ajax({
+			url: '/users/auth',
+			type: 'POST',
+			data: {
+				username: username,
+				password: password
+			},
+			success: function(data) {
+				sessionStorage.setItem('token', data.token);
+				setTimeout(function() {
+					location.href = 'list.html';
+				}, 50);
+			},
+			error: function(err) {
+				alert(err.msg);
+			}
+		})
+	}
+</script>
+</html>
